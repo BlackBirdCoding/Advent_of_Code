@@ -1,45 +1,33 @@
 with open("input_file.txt", "r") as f:
-    number_list = f.read().splitlines()
+    input_as_list = f.read().splitlines()
 
-def joltage(number):
+def joltage(string_of_digits):
 
-    listy = []
-    for i in number:
+    list_of_digits = []
+    for i in string_of_digits:
         i = int(i)
-        listy.append(i)
+        list_of_digits.append(i)
     
-
-   
-    list_joltage = []
+    list_of_joltages = []
     for j in range (0,12):
-        start = 0
-        for i in range (0,len(listy)-11+j):
-            digit = listy[i]
+        highest_number = 0
+        for i in range (0,len(list_of_digits)-11+j):
+            digit = list_of_digits[i]
             digit = int(digit)
-            if digit>start:
-                start = listy[i]
-                pos = i
+            if digit>highest_number:
+                highest_number = list_of_digits[i]
+                position = i
                 
-        list_joltage.append(start)       
-        listy = listy[pos+1:]
+        list_of_joltages.append(highest_number)       
+        list_of_digits = list_of_digits[position+1:]
         
     joltage = ""
-    for i in list_joltage:
+    for i in list_of_joltages:
         joltage += str(i)
     return int(joltage)
-    # for i in range (0,len(listy)):
-    #     digit = listy[i]
-    #     digit = int(digit)
-    #     if digit>end:
-    #         end = listy[i]
-    #         pos = i
-
-    # start = str(start)
-    # end = str(end)
-    # joltage = start+end
-    # joltage = int(joltage)
+    
 count = 0
-for row in number_list:
+for row in input_as_list:
     count+= joltage(row)
 print(count)
 
